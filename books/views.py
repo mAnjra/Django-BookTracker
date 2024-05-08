@@ -55,9 +55,7 @@ def delete_book(request, book_id):
 
 def completed_book(request, book_id):
     '''Updates completed book field with todays date and updates status to completed book'''
-    book = Books.objects.get(id=book_id)
-    if book.start_date == None:
-        
+    book = Books.objects.get(id=book_id)   
     book.status = 'completed'
     book.completed_date = timezone.now().date()
     book.save()
