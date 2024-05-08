@@ -1,0 +1,24 @@
+{% extends "master.html" %}
+ 
+{% block title %}
+<title>Book Details</title>
+<h1 style="font-family: 'Arial', sans-serif;">Book Details</h1>
+{% endblock %}
+
+
+{% block content %}
+<html>
+<body>
+<h1>{{ mybooks.book_title }}</h1>
+  
+<p>Genre: {{ mybooks.book_genre }}</p>
+<p>Created: {{ mybooks.created_at }}</p>
+<p>Start: {{ mybooks.start_date }}</p>
+<p>Completed: {{ mybooks.completed_date }}</p>
+
+<p>Back to <a href="/books">Books</a></p>
+
+</body>
+
+</html>
+{% endblock %}

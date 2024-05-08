@@ -1,0 +1,15 @@
+{% extends "master.html"%}
+
+{% block title %}
+    <h1>Library Extraodinaire<h1>
+{% endblock %}
+
+{% block content %}
+<body>
+
+<h3>Track what you're reading, if you want to, if not then dont track what you're reading</h3>
+<p>Heres your current tracked Library <a href={% url 'books' %}>Click here!</a></p>
+
+</body>
+
+{% endblock %}
