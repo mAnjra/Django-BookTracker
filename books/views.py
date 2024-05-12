@@ -65,9 +65,18 @@ def reading_book(request, book_id):
     '''Updates book with status reading book'''
     book = Books.objects.get(id=book_id)
     book.status = 'reading'
-    book.start_date = timezone.now().date()
+    if book.start_date is None:
+        book.start_date = timezone.now().date()
     book.save()
     return redirect('books')
+
+def add_library(request, book_id):
+    """Adds book to library in cases where its status was chnaged by mistake"""
+    book = Books.objects.get(id=book_id)
+    book.status = 'library'
+    book.save()
+    return redirect('books')
+    
 
 
  
