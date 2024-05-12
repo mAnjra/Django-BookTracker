@@ -76,8 +76,18 @@ def add_library(request, book_id):
     book.status = 'library'
     book.save()
     return redirect('books')
+
+def edit_book(request, book_id):
+    """Editing book data"""
+    book = Books.objects.get(id=book_id)
+
+    if request.method != "POST":
+        form = BookForm(instance=book)
+    else:
+        form = BookForm(instance=book, data=request.POST)
+        if form.is_valid:
+            form.save()
+            return redirect('details', id=book_id)
     
-
-
- 
-
+    context = {'form':form,'book':book}
+    return render(request, 'edit_book.html', context) 

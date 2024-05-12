@@ -16,8 +16,8 @@
 <p>Start: {{ mybooks.start_date }}</p>
 <p>Completed: {{ mybooks.completed_date }}</p>
 
-<p>Back to <a href="/books">Books</a></p>
-
+<p>Back to <a href="{% url 'books' %}">Books</a></p>
+<p> Click here to <a href="{% url 'edit_book' mybooks.id %}">Edit Book</a></p>
 </body>
 
 </html>

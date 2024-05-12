@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 import datetime
 
 # Create your models here.
@@ -12,6 +13,19 @@ class Books(models.Model):
     status = models.CharField(max_length=20, choices=[
         ('library', 'Library'),('reading','Currently Reading'),('completed',"Completed")
     ], default='library')
+
+    def clean(self):
+        if self.completed_date and not self.start_date:
+            raise ValidationError("Cannot mark a book as completed wihtout a start date")
+        
+        if self.completed_date and self.start_date:
+            if self.completed_date < self.start_date:
+                raise ValidationError("Completed date cannot be before start date")
+    
+    def save(self, *args, **kwargs):
+        """Override save method to full clean that matches the validation set out in the clean method"""
+        self.full_clean()
+        super().save(*args, **kwargs)     
 
     class Meta:
         '''This class holds extra information to help with model management'''
