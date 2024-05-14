@@ -16,7 +16,7 @@ class Books(models.Model):
 
     def clean(self):
         if self.completed_date and not self.start_date:
-            raise ValidationError("Cannot mark a book as completed wihtout a start date")
+            raise ValidationError("Cannot mark a book as completed without a start date")
         
         if self.completed_date and self.start_date:
             if self.completed_date < self.start_date:

@@ -1,0 +1,18 @@
+{% extends "master.html" %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <p>Username and password don't match. Please try again.</p>
+    {% endif %}
+
+    <form method="POST" action="{% url 'users:login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button name="Submit">Log in</button>
+        <input type="hidden" name="next"
+            value="{% url 'books:index' %}" />
+    </form>
+
+{% endblock content %}

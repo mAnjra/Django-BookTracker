@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<p>Take me <a href={% url 'index' %}>home</a></p>
+<p>Take me <a href={% url 'books:index' %}>home</a></p>
 
 <body>
 
@@ -15,8 +15,9 @@
 <ul>
   {% for x in completed_books %}
     <li>
-        <a href={% url 'details' x.id %}>{{x.book_title}}</a>
-        <a href={% url 'delete_book' x.id %}>Delete</a>
+        <a href={% url 'books:details' x.id %}>{{x.book_title}}</a>
+        <a href={% url 'books:delete_book' x.id %}>Delete</a>
+        <a href={% url 'books:add_library' x.id %}>Back to Library</a>
     </li>
 
   {% endfor %}
@@ -26,10 +27,10 @@
 <ul>
     {% for x in reading_books %}
       <li>
-          <a href={% url 'details' x.id %}>{{x.book_title}}</a>
-          <a href={% url 'delete_book' x.id %}>Delete</a>
-          <a href={% url 'completed_book' x.id %}>Add to completed</a>
-          <a href={% url 'add_library' x.id %}>Back to Library</a>
+          <a href={% url 'books:details' x.id %}>{{x.book_title}}</a>
+          <a href={% url 'books:delete_book' x.id %}>Delete</a>
+          <a href={% url 'books:completed_book' x.id %}>Add to completed</a>
+          <a href={% url 'books:add_library' x.id %}>Back to Library</a>
       </li>
   
     {% endfor %}
@@ -39,16 +40,16 @@
 <ul>
     {% for x in library_books %}
       <li>
-          <a href={% url 'details' x.id %}>{{x.book_title}}</a>
-          <a href={% url 'delete_book' x.id %}>Delete</a>
-          <a href={% url 'completed_book' x.id %}>Add to completed</a>
-          <a href={% url 'reading_book' x.id %}>Add to currently reading</a>
+          <a href={% url 'books:details' x.id %}>{{x.book_title}}</a>
+          <a href={% url 'books:delete_book' x.id %}>Delete</a>
+          <a href={% url 'books:completed_book' x.id %}>Add to completed</a>
+          <a href={% url 'books:reading_book' x.id %}>Add to currently reading</a>
       </li>
   
     {% endfor %}
 </ul> 
 
-<a href={% url 'add_book' %}>Add Book</a>
+<a href={% url 'books:add_book' %}>Add Book</a>
 
 </body>
 {% endblock %}

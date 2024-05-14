@@ -44,14 +44,14 @@ def add_book(request):
         if form.is_valid():
             new_book = form.save(commit=False)
             new_book.save()
-            return redirect('books')
+            return redirect('books:books')
     context= {'form':form}
     return render(request, 'add_book.html', context)
 
 def delete_book(request, book_id):
     """Deletes book and returns to all books page"""
     book = Books.objects.get(id=book_id).delete()
-    return redirect('books')
+    return redirect('books:books')
 
 def completed_book(request, book_id):
     '''Updates completed book field with todays date and updates status to completed book'''
@@ -59,7 +59,7 @@ def completed_book(request, book_id):
     book.status = 'completed'
     book.completed_date = timezone.now().date()
     book.save()
-    return redirect('books')
+    return redirect('books:books')
 
 def reading_book(request, book_id):
     '''Updates book with status reading book'''
@@ -68,14 +68,15 @@ def reading_book(request, book_id):
     if book.start_date is None:
         book.start_date = timezone.now().date()
     book.save()
-    return redirect('books')
+    return redirect('books:books')
 
 def add_library(request, book_id):
     """Adds book to library in cases where its status was chnaged by mistake"""
     book = Books.objects.get(id=book_id)
     book.status = 'library'
+    book.completed_date = None
     book.save()
-    return redirect('books')
+    return redirect('books:books')
 
 def edit_book(request, book_id):
     """Editing book data"""
@@ -85,9 +86,9 @@ def edit_book(request, book_id):
         form = BookForm(instance=book)
     else:
         form = BookForm(instance=book, data=request.POST)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
-            return redirect('details', id=book_id)
+            return redirect('books:details', id=book_id)
     
     context = {'form':form,'book':book}
     return render(request, 'edit_book.html', context) 
