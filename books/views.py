@@ -9,8 +9,7 @@ from .forms import BookForm
 
 
 def index(request):
-    template = loader.get_template('index.html')
-    return HttpResponse(template.render())
+    return render(request, 'index.html')
 
 def books(request):
     '''Displays Books from all 3 sections, Library, Currently Reading, Completed'''

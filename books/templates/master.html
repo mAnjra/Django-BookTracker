@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<head>
-    {% block title %}
-    {% endblock %}
-</head>
-
 <p>
 {% if user.is_authenticated %}
-    Hi {{user.username}}, hope you're well.
+    Hi {{ user.username }}, hope you're well.
 {% else %}
     <a href="{% url 'users:login' %}">Log in</a>
 {% endif %}
 </p>
-    
-{% block content %}{% endblock %}
+   
+{% block content %}{% endblock content %}
