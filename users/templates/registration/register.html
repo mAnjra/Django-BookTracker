@@ -1,0 +1,14 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+    <form method="POST" action="{% url 'users:register' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button name="Submit">Register</button>
+        <input type="hidden" name="next"
+            value="{% url 'books:index' %}" />
+    </form>
+
+{% endblock content %}
