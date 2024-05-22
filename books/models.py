@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-import datetime
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Books(models.Model):
@@ -13,6 +13,7 @@ class Books(models.Model):
     status = models.CharField(max_length=20, choices=[
         ('library', 'Library'),('reading','Currently Reading'),('completed',"Completed")
     ], default='library')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def clean(self):
         if self.completed_date and not self.start_date:
