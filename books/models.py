@@ -14,6 +14,7 @@ class Books(models.Model):
         ('library', 'Library'),('reading','Currently Reading'),('completed',"Completed")
     ], default='library')
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    notes = models.TextField(blank=True)
 
     def clean(self):
         if self.completed_date and not self.start_date:

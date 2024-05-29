@@ -15,6 +15,7 @@
 <p>Created: {{ mybooks.created_at }}</p>
 <p>Start: {{ mybooks.start_date }}</p>
 <p>Completed: {{ mybooks.completed_date }}</p>
+<p>Notes: {{ mybooks.notes }}</p>
 
 <p>Back to <a href="{% url 'books:books' %}">Books</a></p>
 <p> Click here to <a href="{% url 'books:edit_book' mybooks.id %}">Edit Book</a></p>
